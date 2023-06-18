@@ -200,5 +200,3 @@ INSERT INTO ClubSeason (ClubID, SeasonID, LeagueID, Position) VALUES
 
 INSERT INTO Club (ClubID, ClubName, ClubLocation) VALUES
 ('MU1', 'Manchester United', 'Manchester, England')
-
-SELECT * FROM player;
