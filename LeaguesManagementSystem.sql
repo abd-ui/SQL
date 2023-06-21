@@ -1,12 +1,14 @@
-DROP TABLE Matchday
-DROP TABLE MatchDetails
-DROP TABLE Stadium
-DROP TABLE Referee
-DROP TABLE Manager
-DROP TABLE Player
-DROP TABLE standing
-DROP TABLE Club
-DROP TABLE League
+
+
+-- DROP TABLE Matchday
+-- DROP TABLE MatchDetails
+-- DROP TABLE Stadium
+-- DROP TABLE Referee
+-- DROP TABLE Manager
+-- DROP TABLE Player
+-- DROP TABLE standing
+-- DROP TABLE Club
+-- DROP TABLE League
 
 
 -- Create League table
@@ -153,8 +155,6 @@ VALUES ('EPL', 'English Premier League'),
        ('Bundes', 'German Bundesliga'),
        ('Ligue1', 'French Ligue 1');
 
-SELECT * FROM League
-
 -- Insert data into Club table
 INSERT INTO Club (ClubID, ClubName, ClubLocation, ClubValue, LeagueID)
 VALUES ('MNU', 'Manchester United', 'Manchester', 750, 'EPL'),
@@ -173,8 +173,6 @@ VALUES ('MNU', 'Manchester United', 'Manchester', 750, 'EPL'),
        ('LYO', 'Olympique Lyon', 'Lyon', 500, 'Ligue1'),
        ('MAR', 'Marseille', 'Marseille', 550, 'Ligue1'),
        ('MON', 'AS Monaco', 'Monaco', 700, 'Ligue1');
-
-SELECT * FROM Club;
 
 -- Insert data into Player table
 INSERT INTO Player (PlayerID, PlayerName, PlayerAge, Nationality, ClubID, PlayerSalary, GoalsScored, PlayerPosition)
@@ -226,8 +224,6 @@ VALUES
   ('PL49', 'Joao Felix', 21, 'Portugal', 'ATM', 22.0, 10, 'Forward'),
   ('PL50', 'Mason Mount', 22, 'England', 'CHE', 18.0, 10, 'Midfielder');
 
-SELECT * FROM Player
-
 -- Insert data into Referee table
 INSERT INTO Referee (RefereeID, RefereeName, Nationality, RefereeSalary)
 VALUES
@@ -237,9 +233,6 @@ VALUES
   ('R4', 'Andre Marriner', 'England', 47000.00),
   ('R5', 'Mike Dean', 'England', 49000.00);
 
-SELECT * FROM Referee
-
-
 -- Insert data into Stadium table
 INSERT INTO Stadium (StadiumID, StadiumName, StadiumLocation, Capacity, ClubID)
 VALUES
@@ -248,8 +241,6 @@ VALUES
   ('S3', 'Anfield', 'Liverpool', 53394, 'LIV'),
   ('S4', 'Emirates Stadium', 'London', 60432, 'ARS'),
   ('S5', 'Stamford Bridge', 'London', 40834, 'CHE');
-
-  SELECT * FROM Stadium
 
   -- Insert data into Manager table
 INSERT INTO Manager (ManagerID, ManagerName, Nationality, ClubID)
@@ -261,8 +252,6 @@ VALUES
   ('M5', 'Thomas Tuchel', 'Germany', 'CHE'),
   ('M6', 'Mikel Arteta', 'Spain', 'ARS');
 
-SELECT * FROM Manager;
-
 -- Insert data into MatchDetails table
 INSERT INTO MatchDetails (MatchDetailsID, MatchDate, HomeClubScore, AwayClubScore, Attendance, HomeClubID, AwayClubID, RefereeID, StadiumID)
 VALUES
@@ -273,8 +262,6 @@ VALUES
   ('MD5', '2023-01-07', 0, 0, 45000, 'ARS', 'CHE', 'R2', 'S4'),
   ('MD6', '2023-01-08', 1, 1, 50000, 'MCI', 'MNU', 'R3', 'S2');
 
-SELECT * FROM MatchDetails;
-
 -- Insert data into MatchDay table
 INSERT INTO MatchDay (MatchDetailsID, HomeClubID, AwayClubID)
 VALUES
@@ -284,8 +271,6 @@ VALUES
   ('MD4', 'MCI', 'LIV'),
   ('MD5', 'ARS', 'CHE'),
   ('MD6', 'MCI', 'MNU');
-
-SELECT * FROM MatchDay;
 
 -- Insert data into Standing table
 INSERT INTO Standing (StandingID, ClubID, matches_played, wins, draws, losses, goals_for, goals_against, points)
@@ -301,7 +286,8 @@ VALUES
 
 -- Get the team with the most wins
 
-SELECT ClubID, wins from Standing
+SELECT ClubID, wins 
+FROM Standing
 WHERE (wins = (SELECT max(wins) FROM Standing));
 
 SELECT TOP 1 ClubID, wins
@@ -359,3 +345,10 @@ SELECT r.RefereeName, COUNT(md.MatchDetailsID) AS MatchesOfficiated
 FROM Referee r
 JOIN MatchDetails md ON r.RefereeID = md.RefereeID
 GROUP BY r.RefereeName;
+
+-- Get the players nationality for a specific club
+
+SELECT p.PlayerName, p.Nationality
+FROM Player p
+JOIN Club c ON p.ClubID = c.ClubID
+WHERE c.ClubName = 'Manchester United';
