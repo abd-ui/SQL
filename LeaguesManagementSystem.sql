@@ -376,3 +376,7 @@ FROM Player;
 SELECT PlayerName, Nationality
 FROM Player
 WHERE Nationality = 'Brazil';
+
+SELECT count(PlayerPosition) as 'Number of Midfielder in Real Madrid'
+FROM Player
+WHERE PlayerPosition= 'Midfielder' AND clubid = 'RM';
