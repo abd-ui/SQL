@@ -370,3 +370,9 @@ SET PlayerAge = PlayerAge + 1;
 
 SELECT PLayerName, PlayerAge 
 FROM Player;
+
+-- Get players from the same nation
+
+SELECT PlayerName, Nationality
+FROM Player
+WHERE Nationality = 'Brazil';
