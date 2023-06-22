@@ -351,4 +351,22 @@ GROUP BY r.RefereeName;
 SELECT p.PlayerName, p.Nationality
 FROM Player p
 JOIN Club c ON p.ClubID = c.ClubID
-WHERE c.ClubName = 'Manchester United';
+WHERE c.ClubName = 'Real Madrid';
+
+
+-- Change a player salary
+UPDATE Player
+SET PlayerSalary = 120
+WHERE PlayerID = 'PL1';
+
+SELECT PLayerName, PlayerSalary 
+FROM Player
+WHERE PlayerID = 'PL1';
+
+-- Increase one year to all players
+
+UPDATE Player
+SET PlayerAge = PlayerAge + 1;
+
+SELECT PLayerName, PlayerAge 
+FROM Player;
